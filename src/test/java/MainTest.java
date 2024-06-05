@@ -1,6 +1,7 @@
-import org.example.models.DeluxeBurger;
-import org.example.models.Hamburger;
-import org.example.models.HealthyBurger;
+import org.example.enums.BreadRollType;
+import org.example.enums.CipsType;
+import org.example.enums.DrinkType;
+import org.example.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,9 +21,9 @@ public class MainTest {
 
     @BeforeEach
     void setUp() {
-        hamburger = new Hamburger("Basic", "NORMAL", 4, "WRAP");
-        healthyBurger = new HealthyBurger("Vegan Burger", 5.67, "Sandwich");
-        deluxeBurger = new DeluxeBurger();
+        hamburger = new Hamburger("Basic", "NORMAL", 4, BreadRollType.WRAP);
+        healthyBurger = new HealthyBurger("Vegan Burger", 5.67, BreadRollType.SANDWICH);
+        deluxeBurger = new DeluxeBurger(BreadRollType.DOUBLE_BURGER,new Cips(CipsType.CURLY),new Drink(DrinkType.SPRITE));
     }
 
     @DisplayName("Hamburger sınıfı doğru Access Modifierlara sahip mi")
@@ -74,9 +75,9 @@ public class MainTest {
     @DisplayName("Hamburger sınıfı addAddition methodları doğru çalışıyor mu?")
     @Test
     public void testHamburgerAddAdditionMethods() throws NoSuchFieldException {
-        hamburger.addHamburgerAddition1("test", 3);
-        hamburger.addHamburgerAddition2("test", 3);
-        hamburger.addHamburgerAddition3("test", 3);
+        hamburger.addAddition("test", 3);
+        hamburger.addAddition("test", 3);
+        hamburger.addAddition("test", 3);
         hamburger.itemizeHamburger();
         assertEquals(hamburger.getPrice(), 13);
 
@@ -92,9 +93,9 @@ public class MainTest {
     @DisplayName("Deluxe Burger sınıfı addAddition methodları doğru çalışıyor mu?")
     @Test
     public void testDeluxeBurgerAddAdditionMethods() throws NoSuchFieldException {
-        deluxeBurger.addHamburgerAddition1("test", 3);
-        deluxeBurger.addHamburgerAddition2("test", 3);
-        deluxeBurger.addHamburgerAddition3("test", 3);
+        deluxeBurger.addAddition("test", 3);
+        deluxeBurger.addAddition("test", 3);
+        deluxeBurger.addAddition("test", 3);
         deluxeBurger.itemizeHamburger();
         assertEquals(deluxeBurger.getPrice(), 19.10);
     }
@@ -108,8 +109,8 @@ public class MainTest {
     @DisplayName("Healthy Burger sınıfı addAddition methodları doğru çalışıyor mu?")
     @Test
     public void testHealthyBurgerAddAdditionMethods() throws NoSuchFieldException {
-        healthyBurger.addHealthyAddition1("test", 2);
-        healthyBurger.addHealthyAddition2("test", 2);
+        healthyBurger.addAddition("test", 2);
+        healthyBurger.addAddition("test", 2);
         healthyBurger.itemizeHamburger();
         assertEquals(healthyBurger.getPrice(), 9.67);
     }
